@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
-description: "My final project"
+author: "Peter Jones"
+description: "Separatist Region Recognition"
 output:
   distill::distill_article:
     self_contained: false
@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+For my final project I am interested in diving into the motivations that underpin official recognition by UN member states of separatist regions within sovereign territory. The decision to recognize a fledgling state is rife with political motivations that often have little to do with the relevant separatist region itself; the central government of Spain, for example, derives its nonrecognition of Kosovo (from Serbia) from its own internal problems negotiating with Catalonia. I want to know what factors make a separatist region more likely to be broadly recognized, and, conversely, what factors make it less likely to achieve widespread international recognition. 
