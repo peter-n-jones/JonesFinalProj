@@ -55,13 +55,3 @@ ggplot(data=SDMcon, aes(x=startdate1)) +
 
   
 ```
-
-
-
-
-
-
-
-
-
-
