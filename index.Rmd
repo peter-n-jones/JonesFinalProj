@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Peter Jones"
-description: "Separatist Region Recognition"
+description: "Separatist Region Concessions"
 output:
   distill::distill_article:
     self_contained: false
