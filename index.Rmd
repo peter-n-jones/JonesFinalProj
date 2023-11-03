@@ -25,7 +25,6 @@ A result indicating that SDMs in freer civil societies are less likely to succee
 library(tidyverse)
 library(broom)
 SDM <- read.csv("/Users/peterjones/JonesFinalProj/SDM.csv")
-glimpse(SDM)
 ```
 
 
