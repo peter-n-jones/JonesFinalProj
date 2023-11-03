@@ -17,9 +17,45 @@ I will use a couple available datasets to conduct this analysis. The most import
 
 A result indicating that SDMs in freer civil societies are less likely to succeed would counter my hypothesis; the converse would confirm it. I am hoping that the breadth of data is wide enough such that I can control for factors like geography and GDP as well; if possible, this would make me more confident in the final result of my analysis.
 
+#Milestone 3
+
+#Data Loading 
+
+```{r}
+library(tidyverse)
+library(broom)
+SDM <- read.csv("/Users/peterjones/JonesFinalProj/SDM.csv")
+glimpse(SDM)
+```
 
 
+#Data Visualization
 
+For my first data visualation, I have produced a histogram of the number of successful or semi-successful separatist movements over time. This is an important first test as I look to the other variable I am tracking (media freedom index score), as I will have to closely match the parameters on separatist movement start dates with the timing aspect of the media freedom index scores. I still need to establish how exactly I will tie these data sets together — ie, should I tie the movements to the media freedom index in the year in which they began (this will limit my scope to movements beginning since 2002, which is too limiting) or the year in which they ended (this will limit me to movements that have concluded, though for ongoing movements I could probably just use the current index, perhaps).
+
+```{r}
+  #check parameters of data
+  sum(SDM$indcon, na.rm=TRUE)
+  sum(SDM$autcon, na.rm=TRUE)
+  max(SDM$startdate1)
+  
+SDMcon <- SDM |>
+  filter(indcon == 1 | autcon == 1) |>
+  filter(startdate1 > 1949)
+
+ggplot(data=SDMcon, aes(x=startdate1)) + 
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(
+    title = "Successful or Semi-Successful Separatist Movements by Year",
+    x = "Year",
+    y = "Number of Movements",
+    caption = "Where 'Successful' is defined as a concession of independence, and 
+  'Semi-Successful' is defined as a significant autonomy concession."
+  ) +
+  theme_minimal() 
+
+  
+```
 
 
 
