@@ -55,3 +55,27 @@ ggplot(data=SDMcon, aes(x=startdate1)) +
 
   
 ```
+
+
+#First Analysis
+
+
+
+```{r}
+
+freedom <- read.csv("/Users/peterjones/press-freedom-fh.csv")
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
