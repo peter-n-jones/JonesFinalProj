@@ -84,7 +84,6 @@ ggplot(SDMcon_freedom, aes(x = `Freedom of the Press`)) +
        x = "Freedom Level",
        y = "Quantity") 
 
-
 ```
 
 
