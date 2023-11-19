@@ -40,7 +40,7 @@ For my first data visualation, I have produced a histogram of the number of succ
   
 SDMcon <- SDM |>
   filter(indcon == 1 | autcon == 1) |>
-  filter(startdate1 > 1949)
+  filter(startdate1 > 1979)
 
 ggplot(data=SDMcon, aes(x=startdate1)) + 
   geom_histogram(binwidth = 1, fill = "blue", color = "black") +
@@ -59,14 +59,18 @@ ggplot(data=SDMcon, aes(x=startdate1)) +
 
 #First Analysis
 
-
+First I will join the Self-Determination movement data with  Freedom House press index scores. This includes doing some clean-up work to fix NAs that erroneously emerge from different place labels for some countries like Russia/USSR. There's some weird stuff happening with Hungarians in Yugoslavia, coded for a period after Yugoslavia didn't even exist anymore, that I'll have to fix later.
 
 ```{r}
+library(readr)
+freedom <- read_csv("press-freedom-fh.csv")
+freedom$Entity[freedom$Entity == "Russia"] <- "Russia (USSR)"
 
-freedom <- read.csv("/Users/peterjones/press-freedom-fh.csv")
-
-
-
+#join with press freedom
+SDMcon_freedom <- merge(SDMcon, freedom, by.x = c("country", "year"), by.y = c("Entity", "Year"), all.x = TRUE)
+#move freedom up 
+SDMcon_freedom <- SDMcon_freedom[, c(1:6, 108, 7:107)]
+View(SDMcon_freedom)
 ```
 
 
