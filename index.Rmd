@@ -61,6 +61,7 @@ ggplot(data=SDMcon, aes(x=startdate1)) +
 
 First I will join the Self-Determination movement data with  Freedom House press index scores. This includes doing some clean-up work to fix NAs that erroneously emerge from different place labels for some countries like Russia/USSR. There's some weird stuff happening with Hungarians in Yugoslavia, coded for a period after Yugoslavia didn't even exist anymore, that I'll have to fix later. The press freedom data codes a "0" for no press freedom, a "1" for partial freedom, and a "2" for full freedom.
 
+
 ```{r}
 library(readr)
 freedom <- read_csv("press-freedom-fh.csv")
