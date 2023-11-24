@@ -84,7 +84,6 @@ ggplot(SDMcon_freedom, aes(x = `Freedom of the Press`)) +
   labs(title = "Successful (incl. partial) SDMs by Press Freedom", 
        x = "Freedom Level",
        y = "Quantity") 
-
 ```
 
 
