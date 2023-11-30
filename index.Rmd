@@ -107,7 +107,7 @@ SDM_freedom <- SDM_freedom |>
     rename(press_freedom = "Freedom of the Press")
 #move freedom up 
 SDM_freedom <- SDM_freedom[, c(1:6, 108, 7:107)]
-View(SDM_freedom)
+#View(SDM_freedom)
 #see how movements look over time
 
 ggplot(data=SDM_freedom, aes(x=year)) + 
@@ -144,6 +144,8 @@ ggplot(SDM_freedomlevel_successrate, aes(x = period, y = success_rate, color = p
 
 ```
 
+
+
 ```{r}
 ##okay...now lets group in the internet usage dataset to SDM_freedom
 
@@ -153,7 +155,7 @@ internet_benchmark <- internet |>
   rename(usage_rate = "Individuals using the Internet (% of population)") |>
   rename(benchmark_year = "Year") |>
   group_by(Entity) |>
-  filter(benchmark_year == min(benchmark_year[usage_rate >= 0.15])) %>%
+  filter(benchmark_year == min(benchmark_year[usage_rate >= 0.15])) |>
   slice(1)
 
 internet_benchmark <- internet_benchmark |>
@@ -170,15 +172,28 @@ SDM_freedom_internet <- left_join(SDM_freedom, internet_benchmark, by = c("Code"
 SDM_freedom_internet <- SDM_freedom_internet |>
   mutate(bench_dist = year - benchmark_year)
 
-SDM_freedomlevel_successrate <- SDM_freedom_internet |>
+SDM_freedomlevel_internet_successrate <- SDM_freedom_internet |>
   group_by(press_freedom, bench_dist) |>
-  summarize(success_rate = mean(con))
-
-View(SDM_freedomlevel_successrate)
+  filter(!is.na(bench_dist)) |>
+  filter(bench_dist <= 10 & bench_dist >= -10) |>
+  summarize(success_rate = mean(con)) 
 
 ```
 
 
+Now try plotting
+
+```{r}
+ggplot(SDM_freedomlevel_internet_successrate, aes(x = bench_dist, y = success_rate, color = factor(press_freedom))) +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Success Rate Across Years, Centered Around Benchmark",
+       x = "Years from Benchmark",
+       y = "Success Rate",
+       color = "Press Freedom Level") +
+  scale_color_manual(values = c("red", "orange", "darkgreen")) +  # Customize colors if needed
+  theme_minimal()
+```
 
 
 
