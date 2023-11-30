@@ -38,13 +38,13 @@ For my first data visualation, I have produced a histogram of the number of succ
   #check parameters of data
   sum(SDM$indcon, na.rm=TRUE)
   sum(SDM$autcon, na.rm=TRUE)
-  max(SDM$startdate1)
+  max(SDM$year)
   
 SDMcon <- SDM |>
-  filter(indcon == 1 | autcon == 1) |>
-  filter(startdate1 > 1979)
+  filter(con == 1) |>
+  filter(year > 1979)
 
-ggplot(data=SDMcon, aes(x=startdate1)) + 
+ggplot(data=SDMcon, aes(x=year)) + 
   geom_histogram(binwidth = 1, fill = "blue", color = "black") +
   labs(
     title = "Successful or Semi-Successful Separatist Movements by Year",
@@ -78,7 +78,6 @@ View(SDMcon_freedom)
 
 For my first analysis, I will now make a bar chart of all the successful SDM movements based on whether they took place under governments that were free-press, partially free-press, or not free at all. Some data still needs to be cleaned and it remains to be seen whether or not the likelihood of success was affected (since this doesn't include unsuccessful movements), but this should provide a good visual starting-off point. 
 
-
 ```{r}
 
 ggplot(SDMcon_freedom, aes(x = `Freedom of the Press`)) +
@@ -89,8 +88,65 @@ ggplot(SDMcon_freedom, aes(x = `Freedom of the Press`)) +
 ```
 
 
+#### From Here Down: Working on Write-Up
 
 
+```{r}
+## New question: Does the effect of internet usage on separatist movement success vary among states with repressed, semi-free, and free media environments?
+
+##1. merging non-successful movements too with press freedom
+
+freedom <- read_csv("press-freedom-fh.csv")
+freedom$Entity[freedom$Entity == "Russia"] <- "Russia (USSR)"
+
+SDM_freedom <- merge(SDM, freedom, by.x = c("country", "year"), by.y = c("Entity", "Year"), all.x = TRUE)
+SDM_freedom <- SDM_freedom |>
+    filter(year > 1979) |>
+    filter(!is.na(con)) |>
+    rename(press_freedom = "Freedom of the Press")
+#move freedom up 
+SDM_freedom <- SDM_freedom[, c(1:6, 108, 7:107)]
+View(SDM_freedom)
+#see how movements look over time
+
+ggplot(data=SDM_freedom, aes(x=year)) + 
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  labs(
+    title = "Separatist Movements by Year",
+    x = "Year",
+    y = "Number of Movements") +
+  theme_minimal() 
+
+##2. New DF with biyearly "success rate" by level of press freedom
+
+SDM_freedom_2yr <- SDM_freedom |>
+  mutate(period = cut(year, breaks = seq(1980, max(year) + 2, by = 2), include.lowest = TRUE, labels = FALSE))
+
+SDM_freedomlevel_successrate <- SDM_freedom_2yr |>
+  group_by(press_freedom, period) |>
+  summarize(success_rate = mean(con))
+
+SDM_freedomlevel_successrate <- SDM_freedomlevel_successrate |>
+    filter(!is.na(press_freedom)) 
+
+
+SDM_freedomlevel_successrate$press_freedom <- as.factor(SDM_freedomlevel_successrate$press_freedom)
+
+# lets see how the levels look
+
+ggplot(SDM_freedomlevel_successrate, aes(x = period, y = success_rate, color = press_freedom)) +
+  geom_line() +
+  labs(title = "Success Rate Over Time by Press Freedom Level",
+       x = "Year",
+       y = "Success Rate") +
+  scale_color_manual(values = c("blue", "green", "red"))
+ 
+##okay...now lets group in the internet usage dataset to SDM_freedom
+
+internet <- read_csv("internet_usage.csv")
+
+
+```
 
 
 
