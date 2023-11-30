@@ -180,12 +180,11 @@ SDM_freedomlevel_internet_successrate <- SDM_freedom_internet |>
 
 ```
 
-
-Now try plotting
+Now try with LMs
 
 ```{r}
 ggplot(SDM_freedomlevel_internet_successrate, aes(x = bench_dist, y = success_rate, color = factor(press_freedom))) +
-  geom_line() +
+  geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Success Rate Across Years, Centered Around Benchmark",
        x = "Years from Benchmark",
@@ -194,6 +193,25 @@ ggplot(SDM_freedomlevel_internet_successrate, aes(x = bench_dist, y = success_ra
   scale_color_manual(values = c("red", "orange", "darkgreen")) +  # Customize colors if needed
   theme_minimal()
 ```
+
+
+```{r}
+
+# Linear regression for each category
+
+regressions <- SDM_freedomlevel_internet_successrate |>
+  group_by(press_freedom) |>
+  summarize(intercept = coef(lm(success_rate ~ bench_dist))[[1]],
+            slope = coef(lm(success_rate ~ bench_dist))[[2]])
+regressions
+
+```
+
+For press_freedom = 0: The intercept is approximately 0.0595. In the context of the problem, this suggests that when bench_dist is 0 (at the benchmark year), the estimated success_rate is around 0.0595.
+
+For press_freedom = 0: The slope is approximately -0.0037. In the context of the problem, this suggests that for each additional year away from the benchmark, the success_rate decreases by approximately 0.0037 for press freedom level 0.
+
+
 
 
 
