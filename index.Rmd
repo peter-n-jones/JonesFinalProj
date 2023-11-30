@@ -24,7 +24,9 @@ A result indicating that SDMs in freer civil societies are less likely to succee
 ```{r}
 library(tidyverse)
 library(broom)
+
 SDM <- read.csv("/Users/peterjones/JonesFinalProj/SDM.csv")
+
 ```
 
 
@@ -63,7 +65,7 @@ First I will join the Self-Determination movement data with  Freedom House press
 
 
 ```{r}
-library(readr)
+
 freedom <- read_csv("press-freedom-fh.csv")
 freedom$Entity[freedom$Entity == "Russia"] <- "Russia (USSR)"
 
