@@ -170,9 +170,11 @@ SDM_freedom_internet <- left_join(SDM_freedom, internet_benchmark, by = c("Code"
 SDM_freedom_internet <- SDM_freedom_internet |>
   mutate(bench_dist = year - benchmark_year)
 
-View(SDM_freedom_internet)
+SDM_freedomlevel_successrate <- SDM_freedom_internet |>
+  group_by(press_freedom, bench_dist) |>
+  summarize(success_rate = mean(con))
 
-
+View(SDM_freedomlevel_successrate)
 
 ```
 
