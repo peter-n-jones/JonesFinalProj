@@ -92,7 +92,8 @@ ggplot(SDMcon_freedom, aes(x = `Freedom of the Press`)) +
 
 
 ```{r}
-## New question: Does the effect of internet usage on separatist movement success vary among states with repressed, semi-free, and free media environments?
+## New question: Does the effect of internet usage (benchmark: 15% pop) on separatist movement success vary among states with repressed, semi-free, and free media environments?
+
 
 ##1. merging non-successful movements too with press freedom
 
@@ -140,10 +141,37 @@ ggplot(SDM_freedomlevel_successrate, aes(x = period, y = success_rate, color = p
        x = "Year",
        y = "Success Rate") +
   scale_color_manual(values = c("blue", "green", "red"))
- 
+
+```
+
+```{r}
 ##okay...now lets group in the internet usage dataset to SDM_freedom
 
 internet <- read_csv("internet_usage.csv")
+
+internet_benchmark <- internet |>
+  rename(usage_rate = "Individuals using the Internet (% of population)") |>
+  rename(benchmark_year = "Year") |>
+  group_by(Entity) |>
+  filter(benchmark_year == min(benchmark_year[usage_rate >= 0.15])) %>%
+  slice(1)
+
+internet_benchmark <- internet_benchmark |>
+  filter(!is.na(Code)) |>
+  filter(usage_rate < 1)
+
+  #note: need to fix erroneous rates that are off by 2 decimal places, e.g. Latvia
+
+
+#create distance in years variable from internet usage variable to "anchor" SDMs
+
+SDM_freedom_internet <- left_join(SDM_freedom, internet_benchmark, by = c("Code" = "Code"))
+
+SDM_freedom_internet <- SDM_freedom_internet |>
+  mutate(bench_dist = year - benchmark_year)
+
+View(SDM_freedom_internet)
+
 
 
 ```
