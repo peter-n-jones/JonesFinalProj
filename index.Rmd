@@ -215,7 +215,7 @@ p_values <- lapply(models, function(model) extract_p_values(model))
 
 # Add p-values to the regressions data frame
 regressions$p_value <- unlist(p_values)
-regressions
+knitr::kable(regressions)
 
 ```
 
@@ -267,15 +267,22 @@ SDM_successrate_merged
 
 mod_free <- lm(data = SDM_successrate_merged, Free_Success_Rate ~ bench_dist)
 mod_unfree <-lm(data = SDM_successrate_merged, Unfree_Success_Rate ~ bench_dist)
-mod_free
-mod_unfree
 
-# Is difference stat sig?
+summary(mod_free)
+summary(mod_unfree)
 
-coef(summary(mod_free))[,"Pr(>|t|)"]
-coef(summary(mod_unfree))[,"Pr(>|t|)"]
+coefs_free <- tidy(mod_free)
+coefs_unfree <- tidy(mod_unfree)
 
+# Add a column indicating the model
+coefs_free$Model <- "Free"
+coefs_unfree$Model <- "Unfree"
 
+# Select and reorder columns
+freeunfree_table <- bind_rows(coefs_free, coefs_unfree) |>
+  select(Model, term, estimate, std.error, statistic, p.value)
 
-
+# Print the result table
+knitr::kable(freeunfree_table) #still need to fix col names
+```
 
