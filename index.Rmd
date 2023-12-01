@@ -196,56 +196,10 @@ ggplot(SDM_freedomlevel_internet_successrate, aes(x = bench_dist, y = success_ra
 
 
 ```{r}
-
-#run regressions
-# make table
-
-regressions <- SDM_freedomlevel_internet_successrate |>
-  group_by(press_freedom) |>
-  summarize(intercept = coef(lm(success_rate ~ bench_dist))[[1]],
-            slope = coef(lm(success_rate ~ bench_dist))[[2]])
-
-# Function to extract p-values
-extract_p_values <- function(model) {
-  p_value <- coef(summary(model))[2, "Pr(>|t|)"]
-}
-
-# Calculate p-values for each category
-p_values <- lapply(models, function(model) extract_p_values(model))
-
-# Add p-values to the regressions data frame
-regressions$p_value <- unlist(p_values)
-knitr::kable(regressions)
-
-```
-
-
-```{r}
-#New data frame with differences between repressed and free
-
-differences_repressed <- SDM_freedomlevel_internet_successrate |>
-  group_by(bench_dist) |>
-  summarize(diff_0_2 = success_rate[press_freedom == 0] - success_rate[press_freedom == 2])
-
-# View the updated differences_repressed dataframe
-print(differences_repressed)
-
-ggplot(differences_repressed, aes(x = bench_dist, y = diff_0_2)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Difference in SDM Success Rates, Supressed vs. Free",
-       x = "Years from Benchmark",
-       y = "Mean Difference Suppressed - Free") +
-  theme_minimal()  #
-
-```
-
-```{r}
 #Is difference between suppressed/semi-suppressed and free relative to internet usage?
-# That is, does press freedom have a significant differential effect relative to internet takeup?
+# That is, does overall press freedom have a significant differential effect relative to internet takeup?
 
-# step one: take mean of suppressed and semi-surpressed rates
-# step two: plot against free
-#step three: see if difference significant
+# merge success rates
 
 surpressed_successrate <- SDM_freedomlevel_internet_successrate |>
   filter(press_freedom %in% c(1, 0)) |>
@@ -263,7 +217,7 @@ SDM_successrate_merged <- SDM_successrate_merged |>
   
 SDM_successrate_merged
   
-#Regressions 
+#Run regressions 
 
 mod_free <- lm(data = SDM_successrate_merged, Free_Success_Rate ~ bench_dist)
 mod_unfree <-lm(data = SDM_successrate_merged, Unfree_Success_Rate ~ bench_dist)
@@ -271,14 +225,14 @@ mod_unfree <-lm(data = SDM_successrate_merged, Unfree_Success_Rate ~ bench_dist)
 summary(mod_free)
 summary(mod_unfree)
 
+#Make Table
+
 coefs_free <- tidy(mod_free)
 coefs_unfree <- tidy(mod_unfree)
 
-# Add a column indicating the model
 coefs_free$Model <- "Free"
 coefs_unfree$Model <- "Unfree"
 
-# Select and reorder columns
 freeunfree_table <- bind_rows(coefs_free, coefs_unfree) |>
   select(Model, term, estimate, std.error, statistic, p.value)
 
