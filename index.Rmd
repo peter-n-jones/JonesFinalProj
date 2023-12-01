@@ -197,20 +197,83 @@ ggplot(SDM_freedomlevel_internet_successrate, aes(x = bench_dist, y = success_ra
 
 ```{r}
 
-# Linear regression for each category
+#run regressions
+# make table
 
 regressions <- SDM_freedomlevel_internet_successrate |>
   group_by(press_freedom) |>
   summarize(intercept = coef(lm(success_rate ~ bench_dist))[[1]],
             slope = coef(lm(success_rate ~ bench_dist))[[2]])
+
+# Function to extract p-values
+extract_p_values <- function(model) {
+  p_value <- coef(summary(model))[2, "Pr(>|t|)"]
+}
+
+# Calculate p-values for each category
+p_values <- lapply(models, function(model) extract_p_values(model))
+
+# Add p-values to the regressions data frame
+regressions$p_value <- unlist(p_values)
 regressions
 
 ```
 
-For press_freedom = 0: The intercept is approximately 0.0595. In the context of the problem, this suggests that when bench_dist is 0 (at the benchmark year), the estimated success_rate is around 0.0595.
 
-For press_freedom = 0: The slope is approximately -0.0037. In the context of the problem, this suggests that for each additional year away from the benchmark, the success_rate decreases by approximately 0.0037 for press freedom level 0.
+```{r}
+#New data frame with differences between repressed and free
 
+differences_repressed <- SDM_freedomlevel_internet_successrate |>
+  group_by(bench_dist) |>
+  summarize(diff_0_2 = success_rate[press_freedom == 0] - success_rate[press_freedom == 2])
+
+# View the updated differences_repressed dataframe
+print(differences_repressed)
+
+ggplot(differences_repressed, aes(x = bench_dist, y = diff_0_2)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Difference in SDM Success Rates, Supressed vs. Free",
+       x = "Years from Benchmark",
+       y = "Mean Difference Suppressed - Free") +
+  theme_minimal()  #
+
+```
+
+```{r}
+#Is difference between suppressed/semi-suppressed and free relative to internet usage?
+# That is, does press freedom have a significant differential effect relative to internet takeup?
+
+# step one: take mean of suppressed and semi-surpressed rates
+# step two: plot against free
+#step three: see if difference significant
+
+surpressed_successrate <- SDM_freedomlevel_internet_successrate |>
+  filter(press_freedom %in% c(1, 0)) |>
+  group_by(bench_dist) |>
+  summarise(success_rate = mean(success_rate))
+
+SDM_successrate_merged <- SDM_freedomlevel_internet_successrate |>
+  filter(press_freedom == 2) |>
+  right_join(surpressed_successrate, by = "bench_dist") 
+
+SDM_successrate_merged <- SDM_successrate_merged |>
+  ungroup() |>
+  select(-press_freedom) |>
+  rename(Free_Success_Rate = success_rate.x, Unfree_Success_Rate = success_rate.y)
+  
+SDM_successrate_merged
+  
+#Regressions 
+
+mod_free <- lm(data = SDM_successrate_merged, Free_Success_Rate ~ bench_dist)
+mod_unfree <-lm(data = SDM_successrate_merged, Unfree_Success_Rate ~ bench_dist)
+mod_free
+mod_unfree
+
+# Is difference stat sig?
+
+coef(summary(mod_free))[,"Pr(>|t|)"]
+coef(summary(mod_unfree))[,"Pr(>|t|)"]
 
 
 
