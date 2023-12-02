@@ -238,5 +238,26 @@ freeunfree_table <- bind_rows(coefs_free, coefs_unfree) |>
 
 # Print the result table
 knitr::kable(freeunfree_table) #still need to fix col names
+
+confint(mod_free, 'bench_dist', level=0.95)
+confint(mod_unfree, 'bench_dist', level=0.95)
+
 ```
+
+#Introduction 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
