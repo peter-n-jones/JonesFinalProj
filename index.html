@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.20/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","press-freedom-fh.csv","SDM.csv"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.20/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","internet_usage.csv","press-freedom-fh.csv","SDM.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1543,81 +1543,313 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>#Proposal</p>
-<p>Does freedom of expression and association under a state’s central government affect the likelihood that it will have to make autonomy concessions to self-determination movements? In this study, I seek to gain a deeper understanding of the conditions under which self-determination movements (SDMs) in pursuit of sovereignty are more likely to succeed in gaining autonomy concessions from their central governments. It strikes me that a free civil society (for which I will use free-association and -press index scores across times) may serve as a double-edged sword in the context of SDM success. On the one hand, more democratized flow of information likely makes it easier for separatist agents to mobilize, coordinate, and put their ideas into action. On the other hand, repressed civil societies raise the costs of inaction to SDM participants and may therefore incentivize more extreme tactics that are more likely to extract concessions from central governments. My hypothesis is that freer civil societies are more conducive to central government concessions, most likely because there are lesser audience costs in repressive autocracies.</p>
-<p>The explanatory variables I anticipate analyzing across individual SDMs that make sovereignty declarations — those being my unit of analysis — are their central government’s press freedom and assembly freedom index scores at the onset of the conflict (as determined by Reporters Sans Frontieres), and whether or not separatists employed violence. My outcome variable of interest is whether or not the central government made either an “autonomy” concession or an “independence” concession.</p>
-<p>I will use a couple available datasets to conduct this analysis. The most important one is Nicholas Sambanis’s, Micha Germann’s, and Andreas Schädel’s 2018 dataset on Self-Determination Movements from the Journal of Conflict Resolution. This dataset contains every movement between 1945 and 2012 that fits the definition of “movements by one or more political organizations that are connected to an ethnic group and make claims for increased SD from the state.” This set contains binary variables for concessions and violence, as well as the dates of the movement, and whether or not it made a sovereignty declaration. I will then use Reporters Sans Frontieres’ press freedom index, which it has published since 2002, to extract the press and assembly freedom index scores. While I hope to find some kind of proxy measure for movements between 1945 and 2002, I may just have to make it an analysis of the final decade of the Sambanis data, which I am comfortable with.</p>
-<p>A result indicating that SDMs in freer civil societies are less likely to succeed would counter my hypothesis; the converse would confirm it. I am hoping that the breadth of data is wide enough such that I can control for factors like geography and GDP as well; if possible, this would make me more confident in the final result of my analysis.</p>
-<p>#Milestone 3</p>
-<p>#Data Loading</p>
+<p>#Introduction</p>
+<p>As internet usage began to proliferate on a global scale throughout the early 21st century, questions abounded regarding the interaction between its accompanying “informational revolution” and the future of pro-democracy movements worldwide. Large-scale internet adoption coincided with an unprecedented global uptick in liberal democracy, catalyzed in part by the collapse of the Soviet Union, and the stakes justifiably appeared high. Even today, the relationship between internet penetration and democratization remains controversial; analysts have long identified its dual-edged potential to empower activists and boost informational equity while also conferring new tools upon authoritarians to consolidate their own power. In Rich Media, Poor Democracy, Robert W. McChesney (2015) used American case studies to point out that digital media may pose a threat to democracy. Similarly, Jacob Groshek and Kate Mays attributed “limited agency” to new media adoption vis-a-vis global democratization in a 2017 study of 72 countries. On global net, however, it appears internet may aid democratic transformation—a 2018 analysis of 125 countries, a significantly larger sample size, found that “internet penetration can remarkably increase democratization,” with effects that follow an inverted U-shaped curve (that is, the degree of democracy promotion is highest in middle-penetration countries).</p>
+<p>Whatever the true impact of internet adoption on “democratization” broadly, I find the majority of past studies on this relationship to come short in two important ways. First, they focus on too general and diffuse of an outcome variable — “democracy adoption” is extremely prone to any number of non-internet confounders, such as exogenous global trends or specific leadership decisions with little relevance to technology. Democratization as an outcome variable is therefore less indicative of any specific internet-related causal mechanisms. Second, current studies frequently analyze all states in tandem, with little regard for the potentially differential impact of internet adoption in countries with varying civil-society openness (e.g. repressed vs. free).</p>
+<p>For those reasons, my cross-sectional, data-driven inquiry into this relationship differs in two ways. First, instead of measuring for democracy adoption, it will prioritize another, smaller-scale outcome variable — whether or not domestic self-determination movements (SDMs) successfully elicit favorable concessions from their central governments. These SDMs may or may not explicitly pursue the broad concept of “democracy,” but — given that all of them feature groups seeking greater political autonomy under an ostensibly non-representative central government — they all implicitly further the democratic tenet of self-governance. And second, it will allow space for a potentially differential impact among free civil societies and repressed civil societies by grouping its analysis according to the level of domestic media repression.</p>
+<p>I therefore arrive at the following research question: Does the degree of press/media repression have a differential impact on the success of self-determination movements relative to the year at which their country widely adopted internet usage? In other words, might the potential for internet usage to aid self-determination movement success be less salient under central governments that suppress their media and civil society spheres? I hypothesize that under central governments that repress the media, internet adoption will have a lesser positive impact on the rate at which self-determination movements successfully achieve independence, an autonomy-related concession, or a cultural concession from their central governments.</p>
+<p>#Data</p>
+<p>My inquiry merges three data sets in order to conduct its analysis, all three of which are coded using historical records.</p>
+<p>The first, and by far most important, data source is Nicholas Sambanis’s, Micha Germann’s and Andreas Schädel’s SDM: A New Data Set on Self-determination Movements with an Application to the Reputational Theory of Conflict. This set identifies 464 self-determination movements, which it defines as “constituted by one or more political organizations that are connected to an ethnic group and make claims for increased self-determination from the state.” The variables of note here are “year,” which ties the movement to a calendar year, “country,” which ties the movement to the internationally-recognized sovereign state that includes its claimed territory, and “con,” a binary variable that tracks “concessions by the state to SDM groups in the form of policies that increase SDM groups’ levels of self-rule … and/or increase their cultural rights status” in each given calendar year, but does not account for “token or very minimal concessions.”</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
-<span></span>
 <span><span class='va'>SDM</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"/Users/peterjones/JonesFinalProj/SDM.csv"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>#Data Visualization</p>
-<p>For my first data visualation, I have produced a histogram of the number of successful or semi-successful separatist movements over time. This is an important first test as I look to the other variable I am tracking (media freedom index score), as I will have to closely match the parameters on separatist movement start dates with the timing aspect of the media freedom index scores. I still need to establish how exactly I will tie these data sets together — ie, should I tie the movements to the media freedom index in the year in which they began (this will limit my scope to movements beginning since 2002, which is too limiting) or the year in which they ended (this will limit me to movements that have concluded, though for ongoing movements I could probably just use the current index, perhaps).</p>
+<p>See below a histogram plot that summarizes the number of SDMs that elicited some concession from their central government across the reference period of 1980 to 2012:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='co'>#check parameters of data</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>SDM</span><span class='op'>$</span><span class='va'>indcon</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>[1] 13</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>SDM</span><span class='op'>$</span><span class='va'>autcon</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>[1] 279</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>SDM</span><span class='op'>$</span><span class='va'>startdate1</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>[1] 2012</code></pre>
-<div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>SDMcon</span> <span class='op'>&lt;-</span> <span class='va'>SDM</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>indcon</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>|</span> <span class='va'>autcon</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>startdate1</span> <span class='op'>&gt;</span> <span class='fl'>1979</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>con</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>&gt;</span> <span class='fl'>1979</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>SDMcon</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>startdate1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>SDMcon</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>year</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>binwidth <span class='op'>=</span> <span class='fl'>1</span>, fill <span class='op'>=</span> <span class='st'>"blue"</span>, color <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    title <span class='op'>=</span> <span class='st'>"Successful or Semi-Successful Separatist Movements by Year"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"Successful or Semi-Successful SDMs by Year, 1980-2012"</span>,</span>
 <span>    x <span class='op'>=</span> <span class='st'>"Year"</span>,</span>
 <span>    y <span class='op'>=</span> <span class='st'>"Number of Movements"</span>,</span>
 <span>    caption <span class='op'>=</span> <span class='st'>"Where 'Successful' is defined as a concession of independence, and </span></span>
-<span><span class='st'>  'Semi-Successful' is defined as a significant autonomy concession."</span></span>
+<span><span class='st'>  'Semi-Successful' is defined as a significant autonomy or cultural concession."</span></span>
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> </span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
-<p>#First Analysis</p>
-<p>First I will join the Self-Determination movement data with Freedom House press index scores. This includes doing some clean-up work to fix NAs that erroneously emerge from different place labels for some countries like Russia/USSR. There’s some weird stuff happening with Hungarians in Yugoslavia, coded for a period after Yugoslavia didn’t even exist anymore, that I’ll have to fix later. The press freedom data codes a “0” for no press freedom, a “1” for partial freedom, and a “2” for full freedom.</p>
+<p>I then merged this with the dataset containing all of Freedom House’s freedom of the press index scores from 1979 to 2016, with variables for the country name and its press_freedom, measured as either 0, “not free,” 1, “partly free,” or 2, “free.” A full description of Freedom House’s rigorous methodology in developing these index scores is easily findable on their website.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>freedom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"press-freedom-fh.csv"</span><span class='op'>)</span></span>
 <span><span class='va'>freedom</span><span class='op'>$</span><span class='va'>Entity</span><span class='op'>[</span><span class='va'>freedom</span><span class='op'>$</span><span class='va'>Entity</span> <span class='op'>==</span> <span class='st'>"Russia"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"Russia (USSR)"</span></span>
 <span></span>
-<span><span class='co'>#join with press freedom</span></span>
-<span><span class='va'>SDMcon_freedom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>SDMcon</span>, <span class='va'>freedom</span>, by.x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"country"</span>, <span class='st'>"year"</span><span class='op'>)</span>, by.y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Entity"</span>, <span class='st'>"Year"</span><span class='op'>)</span>, all.x <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='va'>SDM_freedom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>SDM</span>, <span class='va'>freedom</span>, by.x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"country"</span>, <span class='st'>"year"</span><span class='op'>)</span>, by.y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Entity"</span>, <span class='st'>"Year"</span><span class='op'>)</span>, all.x <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span><span class='va'>SDM_freedom</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedom</span> <span class='op'>|&gt;</span></span>
+<span>    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>&gt;</span> <span class='fl'>1979</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>con</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>press_freedom <span class='op'>=</span> <span class='st'>"Freedom of the Press"</span><span class='op'>)</span></span>
 <span><span class='co'>#move freedom up </span></span>
-<span><span class='va'>SDMcon_freedom</span> <span class='op'>&lt;-</span> <span class='va'>SDMcon_freedom</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, <span class='fl'>108</span>, <span class='fl'>7</span><span class='op'>:</span><span class='fl'>107</span><span class='op'>)</span><span class='op'>]</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='va'>SDMcon_freedom</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>SDM_freedom</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedom</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, <span class='fl'>108</span>, <span class='fl'>7</span><span class='op'>:</span><span class='fl'>107</span><span class='op'>)</span><span class='op'>]</span></span>
+<span></span>
+<span><span class='va'>SDMcon_freedom</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedom</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>con</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>For my first analysis, I will now make a bar chart of all the successful SDM movements based on whether they took place under governments that were free-press, partially free-press, or not free at all. Some data still needs to be cleaned and it remains to be seen whether or not the likelihood of success was affected (since this doesn’t include unsuccessful movements), but this should provide a good visual starting-off point.</p>
+<p>The spread of SDMs that elicited concessions is visible in the bar plot below:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SDMcon_freedom</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>`Freedom of the Press`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SDMcon_freedom</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>press_freedom</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span> <span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"blue"</span>, fill <span class='op'>=</span> <span class='st'>"skyblue"</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Successful (incl. partial) SDMs by Press Freedom"</span>, </span>
-<span>       x <span class='op'>=</span> <span class='st'>"Freedom Level"</span>,</span>
-<span>       y <span class='op'>=</span> <span class='st'>"Quantity"</span><span class='op'>)</span> </span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Successful or Semi-Successful SDMs by Press Freedom, 1980-2012"</span>, </span>
+<span>       x <span class='op'>=</span> <span class='st'>"FH Media Freedom Level"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Quantity"</span>,</span>
+<span>       caption <span class='op'>=</span> <span class='st'>"A Freedom Level of 2 denotes full freedom; 0 implies repression"</span><span class='op'>)</span> </span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Finally, I used Our World in Data’s “Share of the population using the Internet” dataset, which it sources from International Telecommunication Union data, to tie the SDM data to the rate of internet usage among their central governments’ respective populations.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>internet</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"internet_usage.csv"</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>I performed a few key transformations on the data to prepare it for my analysis. First, because my study is interested in the differential impact of internet usage among levels of media repression, I grouped the SDMs by their central government repression level, and then again by their year to develop a yearly SDM success rate for each level of press freedom. I chose to calculate a yearly success rate because it incorporates unsuccessful or concession-less movements, rather than merely counting the successful ones. Given the parameters of the data, yearlong intervals seemed to be the ideal length because they are not so long that they minimize rapid changes in internet adoption, but not so short that they minimize SDMs, given SDMs’ slow emergence.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#(ignore 2yr modifier)</span></span>
+<span></span>
+<span><span class='va'>SDM_freedom_2yr</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedom</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>period <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>year</span>, breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1980</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>year</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>2</span>, by <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, include.lowest <span class='op'>=</span> <span class='cn'>TRUE</span>, labels <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>SDM_freedomlevel_successrate</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedom_2yr</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>press_freedom</span>, <span class='va'>period</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>success_rate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>con</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>SDM_freedomlevel_successrate</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedomlevel_successrate</span> <span class='op'>|&gt;</span></span>
+<span>    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>press_freedom</span><span class='op'>)</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='va'>SDM_freedomlevel_successrate</span><span class='op'>$</span><span class='va'>press_freedom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>SDM_freedomlevel_successrate</span><span class='op'>$</span><span class='va'>press_freedom</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>The other key transformation was to anchor each SDM to the proliferation of internet usage in their central governments’ territories. I accomplished this by choosing a somewhat arbitrary benchmark year and creating a new variable for the time (in years) between a given SDM and that benchmark. For the benchmark, I chose the year in which each SDM’s central government’s population reached 15% internet usage, which I figured to be a significant enough share that the internet would have become somewhat accessible to non-super-elites, yet small enough that presently developing countries would not completely fade out of my reference group.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>internet_benchmark</span> <span class='op'>&lt;-</span> <span class='va'>internet</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>usage_rate <span class='op'>=</span> <span class='st'>"Individuals using the Internet (% of population)"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>benchmark_year <span class='op'>=</span> <span class='st'>"Year"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Entity</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>benchmark_year</span> <span class='op'>==</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>benchmark_year</span><span class='op'>[</span><span class='va'>usage_rate</span> <span class='op'>&gt;=</span> <span class='fl'>0.15</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>internet_benchmark</span> <span class='op'>&lt;-</span> <span class='va'>internet_benchmark</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>Code</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>usage_rate</span> <span class='op'>&lt;</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>#create distance in years variable from internet usage variable to "anchor" SDMs</span></span>
+<span></span>
+<span><span class='va'>SDM_freedom_internet</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>SDM_freedom</span>, <span class='va'>internet_benchmark</span>, by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Code"</span> <span class='op'>=</span> <span class='st'>"Code"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>SDM_freedom_internet</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedom_internet</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>bench_dist <span class='op'>=</span> <span class='va'>year</span> <span class='op'>-</span> <span class='va'>benchmark_year</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>SDM_freedomlevel_internet_successrate</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedom_internet</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>press_freedom</span>, <span class='va'>bench_dist</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>bench_dist</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>bench_dist</span> <span class='op'>&lt;=</span> <span class='fl'>10</span> <span class='op'>&amp;</span> <span class='va'>bench_dist</span> <span class='op'>&gt;=</span> <span class='op'>-</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>success_rate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>con</span><span class='op'>)</span><span class='op'>)</span> </span></code></pre>
+</div>
+</div>
+<p>With the data thus primed, the differential impact of media repression on SDM success, measured across time relative to internet adoption, could be analyzed.</p>
+<p>#Results</p>
+<p>A scatter plot of SDM success rate over time, relative to the internet benchmark, for those facing each of the three press freedom levels, is visualized below.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>SDM_freedomlevel_internet_successrate</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>bench_dist</span>, y <span class='op'>=</span> <span class='va'>success_rate</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>press_freedom</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Success Rate Across Years, Centered Around Benchmark"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"Years from 15% Internet Use Benchmark"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Success Rate"</span>,</span>
+<span>       color <span class='op'>=</span> <span class='st'>"Press Freedom Level"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"red"</span>, <span class='st'>"orange"</span>, <span class='st'>"darkgreen"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>  <span class='co'># Customize colors if needed</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+</div>
+<p>As evident from the plot, there appears to be some statistical support for my hypothesis. The best-fit lines for each group indicate a positive correlation between time relative to internet adoption and SDM success rate for free civil societies, yet negative correlations for both partially free and unfree media spheres. Intriguingly, the partially-free negative correlation appears steeper, but by a small enough margin that it can probably be attributed to random chance and the small sample size.</p>
+<p>What remains to be established is whether this apparent difference between free and unfree or partially free civil societies is statistically significant. To test the significance of my results relative to my research question, I first grouped the success rates into free and a merged less-than-free group (e.g. a Freedom House score of 1 or 0). I then ran regressions of success rate (Free_Success_Rate &amp; Unfree_Success_Rate) on benchmark distance, which found a 0.0065462 coefficient for the free group and a -0.0051631 coefficient for the less-than-free group.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>surpressed_successrate</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedomlevel_internet_successrate</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>press_freedom</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>bench_dist</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>success_rate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>success_rate</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>SDM_successrate_merged</span> <span class='op'>&lt;-</span> <span class='va'>SDM_freedomlevel_internet_successrate</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>press_freedom</span> <span class='op'>==</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>right_join</a></span><span class='op'>(</span><span class='va'>surpressed_successrate</span>, by <span class='op'>=</span> <span class='st'>"bench_dist"</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='va'>SDM_successrate_merged</span> <span class='op'>&lt;-</span> <span class='va'>SDM_successrate_merged</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>press_freedom</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>Free_Success_Rate <span class='op'>=</span> <span class='va'>success_rate.x</span>, Unfree_Success_Rate <span class='op'>=</span> <span class='va'>success_rate.y</span><span class='op'>)</span></span>
+<span>  </span>
+<span><span class='va'>SDM_successrate_merged</span></span></code></pre>
+</div>
+<pre><code># A tibble: 21 × 3
+   bench_dist Free_Success_Rate Unfree_Success_Rate
+        &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;
+ 1        -10            0                   0.2   
+ 2         -9            0                   0.0192
+ 3         -8            0.0667              0.207 
+ 4         -7            0                   0.0635
+ 5         -6            0                   0.115 
+ 6         -5            0.2                 0.146 
+ 7         -4            0.0435              0.199 
+ 8         -3            0.125               0.0930
+ 9         -2            0.04                0.0238
+10         -1            0.25                0.0571
+# ℹ 11 more rows</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Run regressions </span></span>
+<span></span>
+<span><span class='va'>mod_free</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>SDM_successrate_merged</span>, <span class='va'>Free_Success_Rate</span> <span class='op'>~</span> <span class='va'>bench_dist</span><span class='op'>)</span></span>
+<span><span class='va'>mod_unfree</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>SDM_successrate_merged</span>, <span class='va'>Unfree_Success_Rate</span> <span class='op'>~</span> <span class='va'>bench_dist</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_free</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Free_Success_Rate ~ bench_dist, data = SDM_successrate_merged)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.13485 -0.05412 -0.04320  0.05268  0.17465 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.112863   0.018735   6.024 8.53e-06 ***
+bench_dist  0.006546   0.003094   2.116   0.0478 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.08585 on 19 degrees of freedom
+Multiple R-squared:  0.1907,    Adjusted R-squared:  0.1481 
+F-statistic: 4.477 on 1 and 19 DF,  p-value: 0.04779</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod_unfree</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Unfree_Success_Rate ~ bench_dist, data = SDM_successrate_merged)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.116078 -0.036862 -0.004435  0.031684  0.089370 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.088842   0.011809   7.523 4.12e-07 ***
+bench_dist  -0.005163   0.001950  -2.648   0.0159 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.05411 on 19 degrees of freedom
+Multiple R-squared:  0.2695,    Adjusted R-squared:  0.231 
+F-statistic: 7.009 on 1 and 19 DF,  p-value: 0.01589</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Make Table</span></span>
+<span></span>
+<span><span class='va'>coefs_free</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod_free</span><span class='op'>)</span></span>
+<span><span class='va'>coefs_unfree</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod_unfree</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>coefs_free</span><span class='op'>$</span><span class='va'>Model</span> <span class='op'>&lt;-</span> <span class='st'>"Free"</span></span>
+<span><span class='va'>coefs_unfree</span><span class='op'>$</span><span class='va'>Model</span> <span class='op'>&lt;-</span> <span class='st'>"Unfree"</span></span>
+<span></span>
+<span><span class='va'>freeunfree_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind_rows.html'>bind_rows</a></span><span class='op'>(</span><span class='va'>coefs_free</span>, <span class='va'>coefs_unfree</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>Model</span>, <span class='va'>term</span>, <span class='va'>estimate</span>, <span class='va'>std.error</span>, <span class='va'>statistic</span>, <span class='va'>p.value</span><span class='op'>)</span></span>
+<span><span class='co'># Print the result table</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>freeunfree_table</span><span class='op'>)</span> <span class='co'>#still need to fix col names</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Free</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.1128633</td>
+<td style="text-align: right;">0.0187348</td>
+<td style="text-align: right;">6.024256</td>
+<td style="text-align: right;">0.0000085</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Free</td>
+<td style="text-align: left;">bench_dist</td>
+<td style="text-align: right;">0.0065462</td>
+<td style="text-align: right;">0.0030940</td>
+<td style="text-align: right;">2.115813</td>
+<td style="text-align: right;">0.0477917</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unfree</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.0888418</td>
+<td style="text-align: right;">0.0118088</td>
+<td style="text-align: right;">7.523382</td>
+<td style="text-align: right;">0.0000004</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Unfree</td>
+<td style="text-align: left;">bench_dist</td>
+<td style="text-align: right;">-0.0051631</td>
+<td style="text-align: right;">0.0019502</td>
+<td style="text-align: right;">-2.647512</td>
+<td style="text-align: right;">0.0158854</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These coefficients imply that for every additional year centered around the 15% internet-adoption benchmark, the success rate of SDMs in the free group increases by about 0.66 percentage points, and the success rate of SDMs in the less-than-free group decreases by about 0.51 percentage points. Across a 20 reference interval, these results are practically significant — for example, in the free group, the coefficient implies a roughly 13 percentage-point difference from 10 years before the benchmark to 10 years after. A 13% house edge on a casino table game, say, would drive any reasonable gambler to another locale.</p>
+<p>To test for statistical significance, we can look to p values. The p values of the regression coefficients for the free and unfree groups were 0.0477917 and 0.0158854, respectively. Therefore, with an alpha of 0.05, we may reject — with 95% confidence — the null hypothesis that there is no impact of the explanatory variable (distance from the internet usage benchmark) on the dependent variable (SDM success rate for a given year).</p>
+<p>Furthermore, the standard errors associated with these regression results allow us to construct a 95% confidence interval, or the range of values so defined that there is a 95% probability that the value of the regression lies within it.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span><span class='op'>(</span><span class='va'>mod_free</span>, <span class='st'>'bench_dist'</span>, level<span class='op'>=</span><span class='fl'>0.95</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>                 2.5 %     97.5 %
+bench_dist 7.05082e-05 0.01302195</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span><span class='op'>(</span><span class='va'>mod_unfree</span>, <span class='st'>'bench_dist'</span>, level<span class='op'>=</span><span class='fl'>0.95</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>                  2.5 %       97.5 %
+bench_dist -0.009244766 -0.001081336</code></pre>
+</div>
+<p>For the free group, then, we arrive at a 95% confidence interval of [7.05082e-05, 0.01302195]. For the less-than-free group, we derive [-0.009244766, -0.001081336]. Both bounds on these confidence intervals exclude zero, implying the same statistical significance of their coefficients as before. Especially notable is that these confidence intervals do not overlap at all, which means that we may say (with 95% confidence) that the relationship of note, between temporal distance from the internet benchmark and SDM concession rate, is more positive in the free than the less-than-free group. In other words, there is a statistically significant differential impact of civil-society freedom level on SDM concession achievement over time relative to internet adoption.</p>
+<p>#Conclusion</p>
+<p>It is important to underscore that this statement represents a far cry from confidently asserting a casual relationship between repression and digitally enabled self-determination. Like many similar quantitative studies in the social sciences, there exist a host of potential confounders and identifying assumptions that preclude a good-faith assertion of causality. However, within the context of this study, a statistically significant corollary relationship has been uncovered, and my hypothesis finds legitimate support.</p>
+<p>For example, instead of media freedom driving the positive impact of internet adoption on SDM success, it could be that the types of SDMs that exist within free civil societies are, for some unknown exogenous reason, more likely to elicit concessions. Perhaps their leaders are better educated, as most of the world’s leading universities seem to exist within liberal societies (though this might not explain the temporal element). Perhaps their economies have recently grown more advanced relative to the rest of the world, and so the opportunity cost of working for an SDM might be lower. Or perhaps the incidence of liberal civil societies, relative to the world at large, has grown or shrunk in some way that has adverse effects on these results.</p>
+<p>Equally problematic is the potential for some limited, narrow political event or trend to have skewed these results. This risk is especially salient with such a small population size as the one considered in this study. For example, the fall of the Soviet Union in the late-20th century largely coincided with the worldwide adoption of the internet, and the resulting widespread political destabilization sparked scores of nascent SDMs. This event — which cannot be attributed to mere internet adoption — may have exerted impact upon my observed relationship. So might shifting geopolitical power dynamics and the rise of a more multipolar global order (not to mention the related and recent worldwide trend of institutional backsliding). These conditions do not undermine the existence of the statistically and practically significant relationship I identified, but they do preclude a causality statement.
+Some aspects of my experimental design also carried their own implicit assumptions. I assumed, for instance, that one-year intervals would be the ideal measure of SDM success rate. I also included what the Sambanis et al dataset defines as “cultural concessions,” or the “binary variable flagging concessions on cultural or minority rights, including concessions on language rights, religion, and education,” among the successful outcomes. Perhaps it would have been better to include only the SDMs that gained full independence; with only 13 entries falling into that category, however, the sample size probably would have been too small to identify a relationship.</p>
+<p>Another study focusing on the same research question, but backed by more time, money, and expertise, might conduct a more lengthy robustness test to isolate potential confounders (like those identified above). It also might go beyond this relatively rudimentary correlational study and specifically assess whether each SDM employed the internet in their pursuit of SD, which would better isolate causal mechanisms than relying on the mere presence of the internet in a given central government’s controlled territory. Finally, a study with unlimited financial and ethical capital might conduct a randomized controlled trial (RCT), wherein an internet-related treatment is assigned to some nascent SDMs and not others, with their successes monitored. Such an RCT would be borderline impossible, however, and a case-by-case revamping of the core dataset would require very significant labor — thus, given the constraints this study faces, I am satisfied with the differential correlational relationship that it has identified.</p>
+<p>#References</p>
+<p>OWID Democracy</p>
+<p>McChesney</p>
+<p>Jacob Groshek and Kate Mays</p>
+<p>Leizhen Zang et al</p>
+<p>Nicholas Sambanis’s, Micha Germann’s and Andreas Schädel’s SDM: A New Data Set on Self-determination Movements with an Application to the Reputational Theory of Conflict</p>
+<p>Freedom House’s freedom of the press index scores</p>
+<p>Our World in Data’s “Share of the population using the Internet” dataset</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
