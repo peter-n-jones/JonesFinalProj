@@ -7,7 +7,7 @@ output:
     self_contained: false
 ---
 
-#Introduction
+# Introduction
 
 
 As internet usage began to proliferate on a global scale throughout the early 21st century, questions abounded regarding the interaction between its accompanying “informational revolution” and the future of pro-democracy movements worldwide. Large-scale internet adoption coincided with an unprecedented global uptick in liberal democracy, catalyzed in part by the collapse of the Soviet Union, and the stakes justifiably appeared high. Even today, the relationship between internet penetration and democratization remains controversial; analysts have long identified its dual-edged potential to empower activists and boost informational equity while also conferring new tools upon authoritarians to consolidate their own power. In Rich Media, Poor Democracy, Robert W. McChesney (2015) used American case studies to point out that digital media may pose a threat to democracy. Similarly, Jacob Groshek and Kate Mays attributed “limited agency” to new media adoption vis-a-vis global democratization in a 2017 study of 72 countries. On global net, however, it appears internet may aid democratic transformation—a 2018 analysis of 125 countries, a significantly larger sample size, found that “internet penetration can remarkably increase democratization,” with effects that follow an inverted U-shaped curve (that is, the degree of democracy promotion is highest in middle-penetration countries). 
@@ -18,7 +18,7 @@ For those reasons, my cross-sectional, data-driven inquiry into this relationshi
 
 I therefore arrive at the following research question: Does the degree of press/media repression have a differential impact on the success of self-determination movements relative to the year at which their country widely adopted internet usage? In other words, might the potential for internet usage to aid self-determination movement success be less salient under central governments that suppress their media and civil society spheres? I hypothesize that under central governments that repress the media, internet adoption will have a lesser positive impact on the rate at which self-determination movements successfully achieve independence, an autonomy-related concession, or a cultural concession from their central governments.
 
-#Data
+# Data
 
 My inquiry merges three data sets in order to conduct its analysis, all three of which are coded using historical records. 
 
@@ -132,7 +132,7 @@ SDM_freedomlevel_internet_successrate <- SDM_freedom_internet |>
 
 With the data thus primed, the differential impact of media repression on SDM success, measured across time relative to internet adoption, could be analyzed. 
 
-#Results
+# Results
 
 A scatter plot of SDM success rate over time, relative to the internet benchmark, for those facing each of the three press freedom levels, is visualized below.
 
@@ -202,9 +202,9 @@ confint(mod_free, 'bench_dist', level=0.95)
 confint(mod_unfree, 'bench_dist', level=0.95)
 ```
 
-For the free group, then, we arrive at a 95% confidence interval of [7.05082e-05, 0.01302195]. For the less-than-free group, we derive [-0.009244766, -0.001081336]. Both bounds on these confidence intervals exclude zero, implying the same statistical significance of their coefficients as before. Especially notable is that these confidence intervals do not overlap at all, which means that we may say (with 95% confidence) that the relationship of note, between temporal distance from the internet benchmark and SDM concession rate, is more positive in the free than the less-than-free group. In other words, there is a statistically significant differential impact of civil-society freedom level on SDM concession achievement over time relative to internet adoption.
+For the free group, then, we arrive at a 95% confidence interval of [7.05082e-05, 0.01302195]. For the less-than-free group, we derive [-0.009244766, -0.001081336]. Both bounds on these confidence intervals exclude zero, implying the same statistical significance of their coefficients as before. Especially notable is that these confidence intervals do not overlap at all, which means that we may say (with 95% confidence) that the relationship of note, between temporal distance from the internet benchmark and SDM concession rate, is more positive in the free than the less-than-free group. In other words, _there is a statistically significant differential impact of civil-society freedom level on SDM concession achievement over time relative to internet adoption._
 
-#Conclusion
+# Conclusion
 
 It is important to underscore that this statement represents a far cry from confidently asserting a casual relationship between repression and digitally enabled self-determination. Like many similar quantitative studies in the social sciences, there exist a host of potential confounders and identifying assumptions that preclude a good-faith assertion of causality. However, within the context of this study, a statistically significant corollary relationship has been uncovered, and my hypothesis finds legitimate support.
 
@@ -215,7 +215,7 @@ Some aspects of my experimental design also carried their own implicit assumptio
 
 Another study focusing on the same research question, but backed by more time, money, and expertise, might conduct a more lengthy robustness test to isolate potential confounders (like those identified above). It also might go beyond this relatively rudimentary correlational study and specifically assess whether each SDM employed the internet in their pursuit of SD, which would better isolate causal mechanisms than relying on the mere presence of the internet in a given central government’s controlled territory. Finally, a study with unlimited financial and ethical capital might conduct a randomized controlled trial (RCT), wherein an internet-related treatment is assigned to some nascent SDMs and not others, with their successes monitored. Such an RCT would be borderline impossible, however, and a case-by-case revamping of the core dataset would require very significant labor — thus, given the constraints this study faces, I am satisfied with the differential correlational relationship that it has identified. 
 
-#References
+# References
 
 OWID Democracy
 
