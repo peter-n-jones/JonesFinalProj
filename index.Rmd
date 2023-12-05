@@ -183,7 +183,7 @@ coefs_free <- tidy(mod_free)
 coefs_unfree <- tidy(mod_unfree)
 
 coefs_free$Model <- "Free"
-coefs_unfree$Model <- "Unfree"
+coefs_unfree$Model <- "Less Than Free"
 
 freeunfree_table <- bind_rows(coefs_free, coefs_unfree) |>
   select(Model, term, estimate, std.error, statistic, p.value)
