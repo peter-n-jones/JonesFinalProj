@@ -1765,7 +1765,7 @@ F-statistic: 7.009 on 1 and 19 DF,  p-value: 0.01589</code></pre>
 <span><span class='va'>coefs_unfree</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>mod_unfree</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>coefs_free</span><span class='op'>$</span><span class='va'>Model</span> <span class='op'>&lt;-</span> <span class='st'>"Free"</span></span>
-<span><span class='va'>coefs_unfree</span><span class='op'>$</span><span class='va'>Model</span> <span class='op'>&lt;-</span> <span class='st'>"Unfree"</span></span>
+<span><span class='va'>coefs_unfree</span><span class='op'>$</span><span class='va'>Model</span> <span class='op'>&lt;-</span> <span class='st'>"Less Than Free"</span></span>
 <span></span>
 <span><span class='va'>freeunfree_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind_rows.html'>bind_rows</a></span><span class='op'>(</span><span class='va'>coefs_free</span>, <span class='va'>coefs_unfree</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>Model</span>, <span class='va'>term</span>, <span class='va'>estimate</span>, <span class='va'>std.error</span>, <span class='va'>statistic</span>, <span class='va'>p.value</span><span class='op'>)</span></span>
@@ -1773,6 +1773,14 @@ F-statistic: 7.009 on 1 and 19 DF,  p-value: 0.01589</code></pre>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>freeunfree_table</span><span class='op'>)</span> <span class='co'>#still need to fix col names</span></span></code></pre>
 </div>
 <table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 17%" />
+<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Model</th>
@@ -1801,7 +1809,7 @@ F-statistic: 7.009 on 1 and 19 DF,  p-value: 0.01589</code></pre>
 <td style="text-align: right;">0.0477917</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Unfree</td>
+<td style="text-align: left;">Less Than Free</td>
 <td style="text-align: left;">(Intercept)</td>
 <td style="text-align: right;">0.0888418</td>
 <td style="text-align: right;">0.0118088</td>
@@ -1809,7 +1817,7 @@ F-statistic: 7.009 on 1 and 19 DF,  p-value: 0.01589</code></pre>
 <td style="text-align: right;">0.0000004</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Unfree</td>
+<td style="text-align: left;">Less Than Free</td>
 <td style="text-align: left;">bench_dist</td>
 <td style="text-align: right;">-0.0051631</td>
 <td style="text-align: right;">0.0019502</td>
