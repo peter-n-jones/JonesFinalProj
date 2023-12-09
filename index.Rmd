@@ -102,7 +102,7 @@ SDM_freedomlevel_successrate <- SDM_freedomlevel_successrate |>
 SDM_freedomlevel_successrate$press_freedom <- as.factor(SDM_freedomlevel_successrate$press_freedom)
 ```
 
-The other key transformation was to anchor each SDM to the proliferation of internet usage in their central governments’ territories. I accomplished this by choosing a somewhat arbitrary benchmark year and creating a new variable for the time (in years) between a given SDM and that benchmark. For the benchmark, I chose the year in which each SDM’s central government’s population reached 15% internet usage, which I figured to be a significant enough share that the internet would have become somewhat accessible to non-super-elites, yet small enough that presently developing countries would not completely  fade out of my reference group. 
+The other key transformation was to anchor each SDM to the proliferation of internet usage in their central governments’ territories. I accomplished this by choosing a somewhat arbitrary benchmark year and creating a new variable for the time (in years) between a given SDM and that benchmark. For the benchmark, I chose the year in which each SDM’s central government’s population reached 0.15% internet usage, which I figured to be a significant enough share that the internet would have attained relevance among elites (and that non-elites would be somewhat aware of its existence), yet small enough that presently developing countries would not completely  fade out of my reference group. 
 
 ```{r}
 internet_benchmark <- internet |>
@@ -115,8 +115,6 @@ internet_benchmark <- internet |>
 internet_benchmark <- internet_benchmark |>
   filter(!is.na(Code)) |>
   filter(usage_rate < 1)
-
-#create distance in years variable from internet usage variable to "anchor" SDMs
 
 SDM_freedom_internet <- left_join(SDM_freedom, internet_benchmark, by = c("Code" = "Code"))
 
@@ -141,7 +139,7 @@ ggplot(SDM_freedomlevel_internet_successrate, aes(x = bench_dist, y = success_ra
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Success Rate Across Years, Centered Around Benchmark",
-       x = "Years from 15% Internet Use Benchmark",
+       x = "Years from 0.15% Internet Use Benchmark",
        y = "Success Rate",
        color = "Press Freedom Level") +
   scale_color_manual(values = c("red", "orange", "darkgreen")) +  # Customize colors if needed
@@ -191,7 +189,7 @@ freeunfree_table <- bind_rows(coefs_free, coefs_unfree) |>
 knitr::kable(freeunfree_table) #still need to fix col names
 ```
 
-These coefficients imply that for every additional year centered around the 15% internet-adoption benchmark, the success rate of SDMs in the free group increases by about 0.66 percentage points, and the success rate of SDMs in the less-than-free group decreases by about 0.51 percentage points. Across a 20 reference interval, these results are practically significant — for example, in the free group, the coefficient implies a roughly 13 percentage-point difference from 10 years before the benchmark to 10 years after. A 13% house edge on a casino table game, say, would drive any reasonable gambler to another locale. 
+These coefficients imply that for every additional year centered around the 0.15% internet-adoption benchmark, the success rate of SDMs in the free group increases by about 0.66 percentage points, and the success rate of SDMs in the less-than-free group decreases by about 0.51 percentage points. Across a 20 reference interval, these results are practically significant — for example, in the free group, the coefficient implies a roughly 13 percentage-point difference from 10 years before the benchmark to 10 years after. A 13% house edge on a casino table game, say, would drive any reasonable gambler to another locale. 
 
 To test for statistical significance, we can look to p values. The p values of the regression coefficients for the free and unfree groups were 0.0477917 and 0.0158854, respectively. Therefore, with an alpha of 0.05, we may reject — with 95% confidence — the null hypothesis that there is no impact of the explanatory variable (distance from the internet usage benchmark) on the dependent variable (SDM success rate for a given year). 
 
@@ -217,18 +215,19 @@ Another study focusing on the same research question, but backed by more time, m
 
 # References
 
-“Expanding Freedom and Democracy.” Freedom House, freedomhouse.org/. Accessed 9 Dec. 2023. 
+“Expanding Freedom and Democracy.” _Freedom House_, freedomhouse.org/. Accessed 9 Dec. 2023. 
 
-Groshek, Jacob, and Kate Mays. “A Time-Series, Multinational Analysis of Democratic Forecasts and Emerging Media Diffusion, 1994–2014.” International Journal of Communication, ijoc.org/index.php/ijoc/article/view/5676/1910. Accessed 9 Dec. 2023. 
+Groshek, Jacob, and Kate Mays. “A Time-Series, Multinational Analysis of Democratic Forecasts and Emerging Media Diffusion, 1994–2014.” _International Journal of Communication_, ijoc.org/index.php/ijoc/article/view/5676/1910. Accessed 9 Dec. 2023. 
 
-Herre, Bastian, et al. “Democracy.” Our World in Data, 25 Sept. 2023, ourworldindata.org/democracy. 
-McChesney, Robert Waterman. Rich Media, Poor Democracy: Communication Politics in Dubious Times. The New Press, 2015. 
+Herre, Bastian, et al. “Democracy.” _Our World in Data_, 25 Sept. 2023, ourworldindata.org/democracy. 
 
-Sambanis, Nicholas, et al. “SDM: A new data set on self-determination movements with an application to the reputational theory of conflict.” Journal of Conflict Resolution, vol. 62, no. 3, 2017, pp. 656–686, https://doi.org/10.1177/0022002717735364. 
+McChesney, Robert Waterman. _Rich Media, Poor Democracy: Communication Politics in Dubious Times._ The New Press, 2015. 
 
-“Share of the Population Using the Internet.” Our World in Data, ourworldindata.org/grapher/share-of-individuals-using-the-internet. Accessed 9 Dec. 2023. 
+Sambanis, Nicholas, et al. “SDM: A new data set on self-determination movements with an application to the reputational theory of conflict.” _Journal of Conflict Resolution_, vol. 62, no. 3, 2017, pp. 656–686, https://doi.org/10.1177/0022002717735364. 
 
-Zang, Leizhen, et al. “Reversing the U: New Evidence on the Internet and Democracy Relationship.” Social Science Computer Review, 2018, journals.sagepub.com/doi/10.1177/0894439318767957. 
+“Share of the Population Using the Internet.” _Our World in Data_, ourworldindata.org/grapher/share-of-individuals-using-the-internet. Accessed 9 Dec. 2023. 
+
+Zang, Leizhen, et al. “Reversing the U: New Evidence on the Internet and Democracy Relationship.” _Social Science Computer Review_, 2018, journals.sagepub.com/doi/10.1177/0894439318767957. 
 
 
 
