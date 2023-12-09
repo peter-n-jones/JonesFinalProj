@@ -228,6 +228,3 @@ Sambanis, Nicholas, et al. “SDM: A new data set on self-determination movement
 “Share of the Population Using the Internet.” _Our World in Data_, ourworldindata.org/grapher/share-of-individuals-using-the-internet. Accessed 9 Dec. 2023. 
 
 Zang, Leizhen, et al. “Reversing the U: New Evidence on the Internet and Democracy Relationship.” _Social Science Computer Review_, 2018, journals.sagepub.com/doi/10.1177/0894439318767957. 
-
-
-
